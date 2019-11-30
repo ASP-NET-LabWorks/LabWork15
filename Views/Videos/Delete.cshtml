@@ -1,0 +1,40 @@
+﻿@model LabWork15.Models.Video
+
+@{
+    ViewBag.Title = "Удаление видео";
+}
+
+<h2>@ViewBag.Title</h2>
+<h5 class="text-danger">Вы действительно хотите удалить это видео?</h5>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UploadDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UploadDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-danger" />
+            @Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

@@ -1,0 +1,13 @@
+﻿@model LabWork15.ViewModels.VideoWatchViewModel
+
+@{
+    ViewBag.Title = "Просмотр видео";
+}
+
+<h2>@ViewBag.Title: @Model.Title</h2>
+@Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-secondary" })
+<hr />
+
+<div class="embed-responsive embed-responsive-16by9">
+    @Html.Partial("Video", Model)
+</div>
