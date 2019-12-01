@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace LabWork15.Controllers
@@ -17,9 +18,8 @@ namespace LabWork15.Controllers
         public FileStreamResult Video(VideoWatchViewModel videoWatch)
         {
             var stream = new FileStream(videoWatch.FilePath, FileMode.Open, FileAccess.Read);
-            var mime = $"video/{Path.GetExtension(videoWatch.FilePath).Replace(".", string.Empty)}";
 
-            return new FileStreamResult(stream, mime);
+            return new FileStreamResult(stream, MimeMapping.GetMimeMapping(videoWatch.FilePath));
         }
 
         // GET: Videos
