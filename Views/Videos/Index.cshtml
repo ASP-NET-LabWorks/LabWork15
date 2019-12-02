@@ -4,39 +4,15 @@
     ViewBag.Title = "Список видео";
 }
 
-<h2>@ViewBag.Title</h2>
-<p>
-    @Html.ActionLink("Загрузить", "Upload", null, new { @class = "btn btn-success" })
-</p>
+<h1>
+    @ViewBag.Title
+</h1>
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UploadDate)
-            </th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UploadDate)
-                </td>
-                <td>
-                    @Html.ActionLink("Смотреть", "Watch", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<a href="@Url.Action("Upload")" class="btn btn-success">
+    <i class="fas fa-plus"></i>
+    Загрузить
+</a>
+
+<div class="my-3">
+    @Html.Partial("Videos", Model)
+</div>

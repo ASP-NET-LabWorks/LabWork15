@@ -22,7 +22,7 @@ namespace LabWork15
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.darkly.min.css",
+                      "~/Content/bootstrap.cosmo.min.css",
                       "~/Content/site.css"));
         }
     }

@@ -4,10 +4,13 @@
     ViewBag.Title = "Просмотр видео";
 }
 
-<h2>@ViewBag.Title: @Model.Title</h2>
-@Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-secondary" })
-<hr />
+<h1>@Model.Title</h1>
 
-<div class="embed-responsive embed-responsive-16by9">
+<a href="@Url.Action("Index")" class="btn btn-secondary">
+    <i class="fas fa-chevron-left"></i>
+    Назад
+</a>
+
+<div class="my-3">
     @Html.Partial("Video", Model)
 </div>

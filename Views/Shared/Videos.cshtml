@@ -1,0 +1,26 @@
+﻿@model IEnumerable<LabWork15.Models.Video>
+
+
+<div class="d-flex flex-wrap">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">@item.Title</h2>
+                <p class="text-right">@item.UploadDate</p>
+                <a href="@Url.Action("Watch", "Videos", new { id = item.Id })" class="btn btn-primary btn-sm">
+                    <i class="fas fa-eye"></i>
+                    Смотреть
+                </a>
+                <a href="@Url.Action("Edit", "Videos", new { id = item.Id })" class="btn btn-warning btn-sm">
+                    <i class="fas fa-pen"></i>
+                    Редактировать
+                </a>
+                <a href="@Url.Action("Delete", "Videos", new { id = item.Id })" class="btn btn-danger btn-sm">
+                    <i class="fas fa-times"></i>
+                    Удалить
+                </a>
+            </div>
+        </div>
+    }
+</div>

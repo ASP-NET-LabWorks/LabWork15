@@ -8,7 +8,7 @@ namespace LabWork15.ViewModels
         [Required, MaxLength(64), Display(Name = "Название")]
         public string Title { get; set; }
 
-        [Required]
+        [Required, Display(Name = "Файл")]
         public HttpPostedFileBase File { get; set; }
     }
 }
