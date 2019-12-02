@@ -17,9 +17,9 @@ namespace LabWork15.Controllers
 
         public FileStreamResult Video(VideoWatchViewModel videoWatch)
         {
-            var stream = new FileStream(videoWatch.FilePath, FileMode.Open, FileAccess.Read);
+            var stream = new FileStream(videoWatch.FileName, FileMode.Open, FileAccess.Read);
 
-            return new FileStreamResult(stream, MimeMapping.GetMimeMapping(videoWatch.FilePath));
+            return new FileStreamResult(stream, MimeMapping.GetMimeMapping(videoWatch.FileName));
         }
 
         // GET: Videos
@@ -42,7 +42,7 @@ namespace LabWork15.Controllers
             var videoWatch = new VideoWatchViewModel
             {
                 Title = video.Title,
-                FilePath = video.FilePath
+                FileName = video.FileName
             };
 
             return View(videoWatch);
@@ -66,14 +66,15 @@ namespace LabWork15.Controllers
                 var videoStoragePath = Server.MapPath(ConfigurationManager.AppSettings.Get("VideoStoragePath"));
                 var guid = Guid.NewGuid().ToString();
                 var fileName = Path.GetFileName(videoUpload.File.FileName);
-                var uniqueFilePath = $"{videoStoragePath}{guid}-{fileName}";
+                var uniqueFileName = $"{guid}-{fileName}";
+                var uniqueFilePath = $"{videoStoragePath}{uniqueFileName}";
 
                 videoUpload.File.SaveAs(uniqueFilePath);
 
                 var video = new Video
                 {
                     Title = videoUpload.Title,
-                    FilePath = $"{uniqueFilePath}",
+                    FileName = uniqueFileName,
                     UploadDate = DateTime.Now
                 };
 
@@ -153,8 +154,8 @@ namespace LabWork15.Controllers
 
             db.SaveChanges();
 
-            if (System.IO.File.Exists(video.FilePath))
-                System.IO.File.Delete(video.FilePath);
+            if (System.IO.File.Exists(video.FileName))
+                System.IO.File.Delete(video.FileName);
 
             return RedirectToAction("Index");
         }

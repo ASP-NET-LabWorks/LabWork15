@@ -1,5 +1,5 @@
 ﻿@model LabWork15.ViewModels.VideoWatchViewModel
 
-<video src="@Url.Action("Video", Model)" controls autoplay loop class="embed-responsive-item">
+<video src="~/Videos/@Model.FileName" controls autoplay loop class="embed-responsive-item">
     Не удалось загрузить видео
 </video>
