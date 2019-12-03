@@ -146,11 +146,11 @@ namespace LabWork15.Controllers
         {
             if (ModelState.IsValid)
             {
-                var videoStoragePath = Server.MapPath(ConfigurationManager.AppSettings.Get("VideoStoragePath"));
+                var storagePath = Server.MapPath(ConfigurationManager.AppSettings.Get("VideoStoragePath"));
                 var guid = Guid.NewGuid().ToString();
                 var fileName = Path.GetFileName(videoUpload.File.FileName);
                 var uniqueFileName = $"{guid}-{fileName}";
-                var uniqueFilePath = Path.Combine(videoStoragePath, uniqueFileName);
+                var uniqueFilePath = Path.Combine(storagePath, uniqueFileName);
 
                 videoUpload.File.SaveAs(uniqueFilePath);
 
@@ -237,8 +237,11 @@ namespace LabWork15.Controllers
 
             db.SaveChanges();
 
-            if (System.IO.File.Exists(video.FileName))
-                System.IO.File.Delete(video.FileName);
+            var storagePath = Server.MapPath(ConfigurationManager.AppSettings.Get("VideoStoragePath"));
+            var filePath = Path.Combine(storagePath, video.FileName);
+
+            if (System.IO.File.Exists(filePath))
+                System.IO.File.Delete(filePath);
 
             return RedirectToAction("Index");
         }
