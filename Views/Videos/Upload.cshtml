@@ -42,9 +42,15 @@
 @section scripts
 {
     <script>
+        const maxSize = 20 * 1024 * 1024
         $(document).ready(function() {
-            $(document).on("change", "#customFile", function(event) {
-                $(this).next(".custom-file-label").html(event.target.files[0].name)
+            $(document).on("change", "#customFile", function (event) {
+                if (event.target.files[0].size > maxSize) {
+                    alert(`Размер файла не должен превышать ${maxSize / 1024 / 1024} МБ`)
+                    $(this).val("")
+                }
+                else
+                    $(this).next(".custom-file-label").html(event.target.files[0].name)
             })
         })
     </script>

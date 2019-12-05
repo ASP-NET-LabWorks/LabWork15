@@ -147,10 +147,19 @@ namespace LabWork15.Controllers
             if (ModelState.IsValid)
             {
                 var storagePath = Server.MapPath(ConfigurationManager.AppSettings.Get("VideoStoragePath"));
-                var guid = Guid.NewGuid().ToString();
+                
+                
                 var fileName = Path.GetFileName(videoUpload.File.FileName);
-                var uniqueFileName = $"{guid}-{fileName}";
-                var uniqueFilePath = Path.Combine(storagePath, uniqueFileName);
+
+                string guid, uniqueFileName, uniqueFilePath;
+
+                do
+                {
+                    guid = Guid.NewGuid().ToString();
+                    uniqueFileName = $"{guid}-{fileName}";
+                    uniqueFilePath = Path.Combine(storagePath, uniqueFileName);
+                }
+                while (System.IO.File.Exists(uniqueFilePath));
 
                 videoUpload.File.SaveAs(uniqueFilePath);
 
